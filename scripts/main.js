@@ -1,7 +1,7 @@
 let url = "http://127.0.0.1:5000/api/v1/listings/test?mls=spark&agent_id=20110315124649945876000000&office_id=20110315124051367346000000&city=AUGUSTA";
 
 async function getListingData() {
-    const response = await fetch('listings.json');
+    const response = await fetch(url);
     const data = await response.json();
 
     displayListings(data);
