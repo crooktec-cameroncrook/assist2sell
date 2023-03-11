@@ -1,7 +1,7 @@
 let url = "http://127.0.0.1:5000/api/v1/listings/test?mls=spark&agent_id=20110315124649945876000000&office_id=20110315124051367346000000&city=AUGUSTA";
 
 async function getListingData() {
-    const response = await fetch('listings.json');
+    const response = await fetch('updated-listings.json');
     const data = await response.json();
 
     displayListings(data);
@@ -58,28 +58,33 @@ function displayListings(listings) {
         let pPrice = document.createElement('p');
         let pArea = document.createElement('p');
         let pFeatures = document.createElement('p');
+        let pAddress = document.createElement('p');
         let pLine1 = document.createElement('p');
         let pLine2 = document.createElement('p');
         let link = document.createElement('a');
 
-        gridBox.classList.add('p-3');
+        // gridBox.classList.add('p-3');
         card.classList.add('p-3');
         card.classList.add('card');
+        card.classList.add('bg-light');
 
         let photo = document.createElement('img');
         photo.setAttribute('src', 'images/barn.jpeg');
         photo.classList.add('mb-2')
         card.appendChild(photo);
         
-        pPrice.textContent = `List Price: \$${listPrice}`;
+        pPrice.innerHTML = `<span class="fw-bold">List Price:</span> \$${listPrice}`;
         card.appendChild(pPrice);
 
-        pArea.textContent = `Area: ${area} SqFt`;
+        pArea.innerHTML = `<span class="fw-bold">Area:</span> ${area} SqFt`;
         card.appendChild(pArea);
 
-        pFeatures.textContent = `Features: ${bed} bed | ${bath} bath`;
+        pFeatures.innerHTML = `<span class="fw-bold">Features:</span> ${bed} bed | ${bath} bath`;
         card.appendChild(pFeatures);
 
+        pAddress.textContent = "Address:";
+        pAddress.classList.add('fw-bold');
+        card.appendChild(pAddress);
         pLine1.textContent = line1;
         card.appendChild(pLine1);
         pLine2.textContent = line2;
@@ -90,8 +95,8 @@ function displayListings(listings) {
         link.classList.add('text-end');
         card.appendChild(link);
 
-        gridBox.appendChild(card);
-        listingDisplay.appendChild(gridBox);
+        // gridBox.appendChild(card);
+        listingDisplay.appendChild(card);
 
 
     }

@@ -6,7 +6,7 @@ async function getListingData() {
 
     const url = `http://127.0.0.1:5000/api/v1/listings/test?mls=spark&listingId=${listingId}`;
 
-    const response = await fetch('listings.json');
+    const response = await fetch('updated-listings.json');
     const data = await response.json();
 
     displayListingData(data, listingId);
@@ -26,14 +26,16 @@ function displayListingData(listings, listingId) {
     const bed = listing.BedsTotal;
     const bath = listing.BathsTotal;
     const yearBuilt = listing.YearBuilt;
-    const zipCode = "";
-    const state = "";
-    const city = "";
-    const streetNum = "";
-    const streetDirPrefix = "";
-    const streetDirSuffix = "";
-    const streetName = "";
-    const streetSuffix = "";
+    const zipCode = listing.PostalCode;
+    const state = listing.StateOrProvince;
+    const city = listing.City;
+    const streetDirPrefix = getValues(listing.StreetDirPrefix);
+    const streetNum = getValues(listing.StreetNumber);
+    const streetName = getValues(listing.StreetName);
+    const streetSuffix = getValues(listing.StreetSuffix);
+    const streetDirSuffix = getValues(listing.StreetDirSuffix);
+    const line1 = `${streetDirPrefix} ${streetNum} ${streetName} ${streetSuffix} ${streetDirSuffix}`;
+    const line2 = `${city}, ${state} ${zipCode}`;
     const publicRemarks = listing.PublicRemarks;
 
     //Agent Variables
@@ -42,6 +44,7 @@ function displayListingData(listings, listingId) {
     const phoneNumber = listing.ListAgentCellPhone;
     const email = listing.ListAgentEmail;
 
+    //Listing Info
     document.querySelector('#id').textContent = listingId;
     document.querySelector('#status').textContent = status;
     document.querySelector('#price').textContent = `$${listPrice}`;
@@ -50,6 +53,10 @@ function displayListingData(listings, listingId) {
     document.querySelector('#area').textContent = `${area} SqFt`;
     document.querySelector('#year').textContent = yearBuilt;
 
+    //photo and address
+    document.querySelector('#line1').textContent = line1;
+    document.querySelector('#line2').textContent = line2;
+
     document.querySelector('#remarks').textContent = publicRemarks;
     
     document.querySelector('#first-name').textContent = firstName;
@@ -57,4 +64,12 @@ function displayListingData(listings, listingId) {
     document.querySelector('#phon').textContent = phoneNumber;
     document.querySelector('#email').textContent = email;
 
+}
+
+function getValues(value) {
+    if (value == null) {
+        value = '';
+    }
+
+    return value;
 }

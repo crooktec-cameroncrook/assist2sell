@@ -5,9 +5,17 @@
     padding: 20px;
 }
 
+#images {
+    width: 80%;
+}
+
 @media screen and (min-width: 725px) {
     #listings-display {
         grid-template-columns: 1fr 1fr;
+    }
+
+    #images {
+        width: 50%;
     }
 }
 
