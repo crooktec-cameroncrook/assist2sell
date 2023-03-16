@@ -1,14 +1,34 @@
 let url = "http://127.0.0.1:5000/api/v1/listings/test?mls=spark&agent_id=20110315124649945876000000&office_id=20110315124051367346000000&city=AUGUSTA";
 
 async function getListingData() {
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // const mlsID = urlParams.get('mlsid');
+
     const response = await fetch('updated-listings.json');
-    const data = await response.json();
+    let data = await response.json();
 
     displayListings(data);
+
+    const filterBtn = document.querySelector('#filter-btn');
+    filterBtn.addEventListener('click', reset);
+
+    function reset() {
+        const listings = document.querySelector('#listings-display');
+    
+        listings.innerHTML = '';
+    
+        let filters = getFilterData();
+    
+        let filteredListings = filterData(filters, data);
+    
+        displayListings(filteredListings);
+    }
 }
 
-getListingData()
+getListingData();
 
+//Additional Functions
 function displayListings(listings) {
     //Value Variables
     let listPrice = "";
@@ -53,7 +73,6 @@ function displayListings(listings) {
         let line1 = `${streetDirPrefix} ${streetNum} ${streetName} ${streetSuffix} ${streetDirSuffix}`;
         let line2 = `${city}, ${state} ${zipCode}`;
 
-        let gridBox = document.createElement('div')
         let card = document.createElement('div');
         let pPrice = document.createElement('p');
         let pArea = document.createElement('p');
@@ -108,4 +127,30 @@ function getValues(value) {
     }
 
     return value;
+}
+
+function getFilterData() {
+    let filters = {
+        mlsId: null
+    };
+
+    let mlsIdFilter = document.querySelector('#mls-id').value;
+
+    if (mlsIdFilter != '') {
+        filters['mlsId'] = mlsIdFilter;
+    }
+
+    return filters;
+}
+
+function filterData(filters, listingsData) {
+    let cvData = listingsData;
+
+    let mlsId = filters.mlsId;
+
+    if (mlsId != null) {
+        cvData = {mlsID: listingsData[mlsId]};
+    }
+
+    return cvData;
 }

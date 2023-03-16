@@ -2,7 +2,7 @@
 async function getListingData() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const listingId = urlParams.get('listingId')
+    const listingId = urlParams.get('listingId');
 
     const url = `http://127.0.0.1:5000/api/v1/listings/test?mls=spark&listingId=${listingId}`;
 
@@ -37,6 +37,7 @@ function displayListingData(listings, listingId) {
     const line1 = `${streetDirPrefix} ${streetNum} ${streetName} ${streetSuffix} ${streetDirSuffix}`;
     const line2 = `${city}, ${state} ${zipCode}`;
     const publicRemarks = listing.PublicRemarks;
+    // http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003
 
     //Agent Variables
     const firstName = listing.ListAgentFirstName;
@@ -56,6 +57,7 @@ function displayListingData(listings, listingId) {
     //photo and address
     document.querySelector('#line1').textContent = line1;
     document.querySelector('#line2').textContent = line2;
+    document.querySelector('#address-link').setAttribute('href', `http://maps.google.com/?q=${line1}${line2}`);
 
     document.querySelector('#remarks').textContent = publicRemarks;
     

@@ -48,11 +48,46 @@
             </div>
           </nav>
     </header>
-    <main>
-        <h1 class="m-3 text-center">Listings</h1>
-        <section id="listings-display">
 
-        </section>
+
+    <main>
+      <div id="filter-div" class="p-3">
+        <!-- <form class="d-flex flex-column">
+          <label for="price" class="form-label">Filter by Price</label>
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="min-price">Min Price</label>
+            <input type="number" min="1" step="any" id="min-price" name="minPrice" class="form-control">
+          </div>
+          <label for="mlsid">Search by MLS #</label>
+          <input type="search" id="mlsid" name="mlsid" class="me-2 form-control">
+
+          <input type="submit" value="Search" class="btn btn-primary">
+          <button class="btn btn-primary">Search</button>
+        </form> -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="min-price">Min Price</span>
+          <span class="input-group-text">$</span>
+          <input type="number" min="1" step="any" id="min-price" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+
+          <span class="input-group-text" id="max-price">Max Price</span>
+          <span class="input-group-text">$</span>
+          <input type="number" min="1" step="any" id="min-price" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">mls #</span>
+          <input type="search" id="mls-id" class="form-control" aria-label="Search by mls id" aria-describedby="mlsid-label">
+        </div>
+
+        <div>
+          <button type="button" id="filter-btn" class="btn btn-primary">Search</button>
+          <button type="button" id="reset-btn" class="btn btn-secondary">Reset</button>
+        </div>
+      </div>
+
+      <h1 class="m-3 text-center">Listings</h1>
+      <section id="listings-display">
+
+      </section>
     </main>
     <footer>
 
